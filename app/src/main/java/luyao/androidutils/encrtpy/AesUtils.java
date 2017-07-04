@@ -51,6 +51,15 @@ public class AesUtils {
         return secretKey.getEncoded();
     }
 
+    /**
+     * 初始化Cipher
+     *
+     * @param mode            Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
+     * @param key             加密秘钥
+     * @param iv              初始化向量
+     * @param cipherAlgotirhm 算法/工作模式/填充模式  例如：AES/CFB/NOPADDING
+     * @return Cipher
+     */
     private static Cipher initCipher(int mode, byte[] key, byte[] iv, String cipherAlgotirhm) {
         try {
             Key k = toKey(key);
@@ -119,7 +128,17 @@ public class AesUtils {
         return null;
     }
 
-    public static boolean handleFile(int mode, byte[] key, byte[] iv, String sourceFilePath, String destFilePath) {
+    /**
+     * 文件加解密
+     *
+     * @param mode           Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE 加密/解密
+     * @param key            加解密秘钥
+     * @param iv             初始化向量
+     * @param sourceFilePath 源文件路径
+     * @param destFilePath   目标文件路径
+     * @return boolean
+     */
+    private static boolean handleFile(int mode, byte[] key, byte[] iv, String sourceFilePath, String destFilePath) {
 
         File sourceFile = new File(sourceFilePath);
         File destFile = new File(destFilePath);
@@ -155,10 +174,16 @@ public class AesUtils {
         return false;
     }
 
+    /**
+     * 文件加密
+     */
     public static boolean encryptFile(byte[] key, byte[] iv, String sourceFilePath, String destFilePath) {
         return handleFile(Cipher.ENCRYPT_MODE, key, iv, sourceFilePath, destFilePath);
     }
 
+    /**
+     * 文件解密
+     */
     public static boolean decryptFile(byte[] key, byte[] iv, String sourceFilePath, String destFilePath) {
         return handleFile(Cipher.DECRYPT_MODE, key, iv, sourceFilePath, destFilePath);
     }
