@@ -1,9 +1,15 @@
 package luyao.androidutils.encrtpy;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
@@ -19,6 +25,7 @@ public class AesUtils {
 
     public static final String KEY_ALGORITHM = "AES";
     public static final String CIPHER_ALGORITHM_DEFAULT = "AES";
+    public static final String AES_CFB_NOPADDING = "AES/CFB/NOPADDING";
 
     /**
      * 转换秘钥
@@ -44,6 +51,24 @@ public class AesUtils {
         return secretKey.getEncoded();
     }
 
+    private static Cipher initCipher(int mode, byte[] key, byte[] iv, String cipherAlgotirhm) {
+        try {
+            Key k = toKey(key);
+            Cipher cipher = Cipher.getInstance(cipherAlgotirhm);
+            String CipherAlgotirhm = cipherAlgotirhm.toUpperCase();
+            if (CipherAlgotirhm.contains("CFB") ||
+                    CipherAlgotirhm.contains("CBC"))
+                cipher.init(mode, k, new IvParameterSpec(iv));
+            else
+                cipher.init(mode, k);
+            return cipher;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
     public static byte[] encrypt(byte[] data, byte[] key) {
         return encrypt(data, key, CIPHER_ALGORITHM_DEFAULT);
     }
@@ -61,14 +86,7 @@ public class AesUtils {
      */
     public static byte[] encrypt(byte[] data, byte[] key, byte[] iv, String cipherAlgotirhm) {
         try {
-            Key k = toKey(key);
-            Cipher cipher = Cipher.getInstance(cipherAlgotirhm);
-            String CipherAlgotirhm = cipherAlgotirhm.toUpperCase();
-            if (CipherAlgotirhm.contains("CFB") ||
-                    CipherAlgotirhm.contains("CBC"))
-                cipher.init(Cipher.ENCRYPT_MODE, k, new IvParameterSpec(iv));
-            else
-                cipher.init(Cipher.ENCRYPT_MODE, k);
+            Cipher cipher = initCipher(Cipher.ENCRYPT_MODE, key, iv, cipherAlgotirhm);
             return cipher.doFinal(data);
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,18 +111,55 @@ public class AesUtils {
      */
     public static byte[] decrypt(byte[] data, byte[] key, byte[] iv, String cipherAlgotirhm) {
         try {
-            Key k = toKey(key);
-            Cipher cipher = Cipher.getInstance(cipherAlgotirhm);
-            String CipherAlgotirhm = cipherAlgotirhm.toUpperCase();
-            if (CipherAlgotirhm.contains("CFB") ||
-                    CipherAlgotirhm.contains("CBC"))
-                cipher.init(Cipher.DECRYPT_MODE, k, new IvParameterSpec(iv));
-            else
-                cipher.init(Cipher.DECRYPT_MODE, k);
+            Cipher cipher = initCipher(Cipher.DECRYPT_MODE, key, iv, cipherAlgotirhm);
             return cipher.doFinal(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean handleFile(int mode, byte[] key, byte[] iv, String sourceFilePath, String destFilePath) {
+
+        File sourceFile = new File(sourceFilePath);
+        File destFile = new File(destFilePath);
+
+        try {
+            if (sourceFile.exists() && sourceFile.isFile()) {
+                if (!destFile.getParentFile().exists())
+                    destFile.getParentFile().mkdirs();
+                destFile.createNewFile();
+
+                InputStream in = new FileInputStream(sourceFile);
+                OutputStream out = new FileOutputStream(destFile);
+                Cipher cipher = initCipher(mode, key, iv, AES_CFB_NOPADDING);
+                CipherInputStream cin = new CipherInputStream(in, cipher);
+
+                byte[] b = new byte[1024];
+                int read = 0;
+                while ((read = cin.read(b)) != -1) {
+                    out.write(b, 0, read);
+                    out.flush();
+                }
+
+                cin.close();
+                in.close();
+                out.close();
+
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean encryptFile(byte[] key, byte[] iv, String sourceFilePath, String destFilePath) {
+        return handleFile(Cipher.ENCRYPT_MODE, key, iv, sourceFilePath, destFilePath);
+    }
+
+    public static boolean decryptFile(byte[] key, byte[] iv, String sourceFilePath, String destFilePath) {
+        return handleFile(Cipher.DECRYPT_MODE, key, iv, sourceFilePath, destFilePath);
     }
 }

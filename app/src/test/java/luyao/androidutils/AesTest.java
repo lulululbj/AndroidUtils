@@ -73,4 +73,18 @@ public class AesTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void aesFile(){
+        String sourceFIle="G:/test.txt";
+        String encryptFile="G:/encrypt.txt";
+        String decryptFile="G:/decrypt.txt";
+        try {
+            byte[] key=AesUtils.initKey(128);
+            AesUtils.encryptFile(key,key,sourceFIle,encryptFile);
+            AesUtils.decryptFile(key,key,encryptFile,decryptFile);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
 }
