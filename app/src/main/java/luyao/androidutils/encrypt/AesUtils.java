@@ -1,4 +1,4 @@
-package luyao.androidutils.encrtpy;
+package luyao.androidutils.encrypt;
 
 import java.io.File;
 import java.io.FileInputStream;

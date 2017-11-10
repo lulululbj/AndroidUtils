@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.security.NoSuchAlgorithmException;
 
-import luyao.androidutils.encrtpy.AesUtils;
+import luyao.androidutils.encrypt.AesUtils;
 
 import static org.junit.Assert.assertEquals;
 
