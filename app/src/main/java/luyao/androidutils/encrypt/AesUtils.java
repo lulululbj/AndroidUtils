@@ -23,9 +23,9 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AesUtils {
 
-    public static final String KEY_ALGORITHM = "AES";
-    public static final String CIPHER_ALGORITHM_DEFAULT = "AES";
-    public static final String AES_CFB_NOPADDING = "AES/CFB/NOPADDING";
+    private static final String KEY_ALGORITHM = "AES";
+    private static final String CIPHER_ALGORITHM_DEFAULT = "AES";
+    private static final String AES_CFB_NOPADDING = "AES/CFB/NOPADDING";
 
     /**
      * 转换秘钥

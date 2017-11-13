@@ -1,4 +1,4 @@
-package luyao.androidutils;
+package luyao.androidutils.encrypt;
 
 import org.junit.Before;
 import org.junit.Test;
