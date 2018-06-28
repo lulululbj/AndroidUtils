@@ -114,7 +114,7 @@ public class TransformUtils {
     /**
      * 16进制字符串转 byte[]
      */
-    public static byte[] hexStr2Byte(String hexStr) {
+    public static byte[] hexStr2Bytes(String hexStr) {
         if (null == hexStr || hexStr.length() == 0) return null;
         byte[] result = new byte[hexStr.length() / 2];
         for (int i = 0; i < hexStr.length() / 2; i++) {
@@ -141,6 +141,9 @@ public class TransformUtils {
         return builder.toString().trim();
     }
 
+    /**
+     * 16进制字符串转普通字符串
+     */
     public static String hex2String(String hex) {
         char[] hexs = hex.toCharArray();
         byte[] bytes = new byte[hex.length() / 2];

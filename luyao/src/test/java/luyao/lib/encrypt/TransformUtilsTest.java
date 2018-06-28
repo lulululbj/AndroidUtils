@@ -48,7 +48,7 @@ public class TransformUtilsTest {
 
     @Test
     public void hexStr2Byte() {
-        byte[] b = TransformUtils.hexStr2Byte(HEX_STRING);
+        byte[] b = TransformUtils.hexStr2Bytes(HEX_STRING);
         assertArrayEquals(BYTES, b);
     }
 
