@@ -1,4 +1,4 @@
-package luyao.androidutils.encrypt;
+package luyao.lib.encrypt;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -115,12 +115,12 @@ public class AesUtils {
      * @param data            加密数据
      * @param key             解密秘钥
      * @param iv              初始化向量 CFB,CBC模式下需要
-     * @param cipherAlgotirhm 算法/工作模式/填充模式  例如：AES/CFB/NOPADDING
+     * @param cipherAlgorithm 算法/工作模式/填充模式  例如：AES/CFB/NOPADDING
      * @return 原始数据
      */
-    public static byte[] decrypt(byte[] data, byte[] key, byte[] iv, String cipherAlgotirhm) {
+    public static byte[] decrypt(byte[] data, byte[] key, byte[] iv, String cipherAlgorithm) {
         try {
-            Cipher cipher = initCipher(Cipher.DECRYPT_MODE, key, iv, cipherAlgotirhm);
+            Cipher cipher = initCipher(Cipher.DECRYPT_MODE, key, iv, cipherAlgorithm);
             return cipher.doFinal(data);
         } catch (Exception e) {
             e.printStackTrace();

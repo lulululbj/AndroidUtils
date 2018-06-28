@@ -1,11 +1,9 @@
-package luyao.androidutils.encrypt;
+package luyao.lib.encrypt;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.security.NoSuchAlgorithmException;
-
-import luyao.androidutils.encrypt.AesUtils;
 
 import static org.junit.Assert.assertEquals;
 

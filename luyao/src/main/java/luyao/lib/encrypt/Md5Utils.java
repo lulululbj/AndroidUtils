@@ -1,4 +1,4 @@
-package luyao.androidutils.encrypt;
+package luyao.lib.encrypt;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import luyao.androidutils.TransformUtils;
+import luyao.lib.TransformUtils;
+
 
 /**
  * Created by luyao
