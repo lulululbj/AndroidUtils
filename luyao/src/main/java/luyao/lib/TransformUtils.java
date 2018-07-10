@@ -9,8 +9,8 @@ import java.nio.charset.Charset;
 
 public class TransformUtils {
 
-    public static final String hexString = "0123456789ABCDEF";
-    public static final char[] hexCode = "0123456789ABCDEF".toCharArray();
+    private static final String hexString = "0123456789ABCDEF";
+    private static final char[] hexCode = "0123456789ABCDEF".toCharArray();
 
     /**
      * byte[] 转 int
