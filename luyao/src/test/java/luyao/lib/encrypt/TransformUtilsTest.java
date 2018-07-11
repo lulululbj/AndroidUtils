@@ -49,6 +49,7 @@ public class TransformUtilsTest {
     @Test
     public void hexStr2Byte() {
         byte[] b = TransformUtils.hexStr2Bytes(HEX_STRING);
+        System.out.println("hex string length: "+HEX_STRING.length()+" bytes length: "+b.length);
         assertArrayEquals(BYTES, b);
     }
 
