@@ -156,4 +156,15 @@ public class TransformUtils {
         return new String(bytes, Charset.forName("utf-8"));
     }
 
+    /**
+     * 用 int 数组表示无符号 byte 数组
+     */
+    public static int[] bytes2Ints(byte[] b) {
+        int[] ints = new int[b.length];
+        for (int i = 0; i < b.length; i++) {
+            ints[i] = b[i] & 0xff;
+        }
+        return ints;
+    }
+
 }
