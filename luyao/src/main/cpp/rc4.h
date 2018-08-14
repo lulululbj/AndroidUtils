@@ -9,9 +9,9 @@ class RC4 {
 public:
     void ksa(unsigned char *key, int keyLength);
 
-    void *prga(void *in, int len);
+    char *prga(unsigned char *in, int len);
 
-    void *doRC4(void *in, unsigned char *key, int dataLen, int keyLen);
+    char *doRC4(unsigned char *in, unsigned char *key, int dataLen, int keyLen);
 
 private:
     unsigned char S[256];

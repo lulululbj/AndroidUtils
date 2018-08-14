@@ -16,7 +16,7 @@ public class RC4Utils {
         return rc4(content, TransformUtils.bytes2Ints(key));
     }
 
-    public static byte[] rc4(String content, int[] key) {
+    private static byte[] rc4(String content, int[] key) {
         return rc4(content.getBytes(), key);
     }
 
@@ -24,7 +24,7 @@ public class RC4Utils {
         return rc4(content, TransformUtils.bytes2Ints(key));
     }
 
-    public static byte[] rc4(byte[] content, int[] key) {
+    private static byte[] rc4(byte[] content, int[] key) {
         char[] S = new char[256];
         char[] keySchedule = new char[content.length];
         byte[] result = new byte[content.length];
@@ -67,5 +67,9 @@ public class RC4Utils {
         s[j] = mTemp;
     }
 
-    public native byte[] rc4_native(byte[] content, byte[] key);
+    static {
+        System.loadLibrary("native");
+    }
+
+    public static native byte[] rc4Native(byte[] content, byte[] key,int dataLe,int keyLen);
 }
