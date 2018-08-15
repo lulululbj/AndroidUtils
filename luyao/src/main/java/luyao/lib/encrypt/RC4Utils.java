@@ -71,5 +71,5 @@ public class RC4Utils {
         System.loadLibrary("native");
     }
 
-    public static native byte[] rc4Native(byte[] content, byte[] key,int dataLe,int keyLen);
+    public static native byte[] rc4Native(byte[] content, byte[] key);
 }

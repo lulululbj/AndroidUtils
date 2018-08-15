@@ -20,13 +20,13 @@ void RC4::ksa(unsigned char *key, int keyLength) {
     }
 }
 
-char *RC4::prga(unsigned char *in, int len) {
-    char *k = new char[len];
-    unsigned char *result = in;
-    unsigned int i = 0, j = 0, x = 0;
+unsigned char *RC4::prga(unsigned char *in, int len) {
+    unsigned char *k = new unsigned char[len];
+//    unsigned char *result = in;
+    unsigned int i = 0, j = 0, z = 0;
     unsigned char temp;
 
-    for (int z = 0; z < len; ++z) {
+    for (z = 0; z < len; ++z) {
         i = (i + 1) % 256;
         j = (j + S[i]) % 256;
 
@@ -34,15 +34,15 @@ char *RC4::prga(unsigned char *in, int len) {
         S[i] = S[j];
         S[j] = temp;
 
-        k[x] = S[(S[i] + S[j]) % 256];
+        k[z] = S[(S[i] + S[j]) % 256];
 
-        result[z] = result[z] ^ k[z];
+        in[z] = in[z] ^ k[z];
     }
 
-    return (char *) (result);
+    return in;
 }
 
-char *RC4::doRC4(unsigned char *in, unsigned char *key, int dataLen, int keyLen) {
+unsigned char *RC4::doRC4(unsigned char *in, unsigned char *key, int dataLen, int keyLen) {
     ksa(key, keyLen);
     return prga(in, dataLen);
 }

@@ -22,7 +22,7 @@ Java_luyao_lib_encrypt_RC4Utils_rc4Native(JNIEnv *env, jobject instance, jbyteAr
     int key_len = env->GetArrayLength(key_);
     unsigned char *keys = new unsigned char[key_len + 1];
     memset(keys, 0, key_len + 1);
-    memcpy(keys, content, key_len);
+    memcpy(keys, key, key_len);
     keys[key_len] = 0;
 
     RC4 rc4;
