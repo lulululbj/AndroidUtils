@@ -35,6 +35,30 @@ public class HashUtils {
         }
     }
 
+    public static byte[] md5(byte[] data) {
+        return hash(data, Hash.MD5);
+    }
+
+    public static byte[] sha1(byte[] data) {
+        return hash(data, Hash.SHA1);
+    }
+
+    public static byte[] sha256(byte[] data) {
+        return hash(data, Hash.SHA256);
+    }
+
+    public static String md5(String data) {
+        return hash(data, Hash.MD5);
+    }
+
+    public static String sha1(String data) {
+        return hash(data, Hash.SHA1);
+    }
+
+    public static String sha256(String data) {
+        return hash(data, Hash.SHA256);
+    }
+
     public static byte[] hash(byte[] data, Hash algorithm) {
         byte[] result = null;
         try {

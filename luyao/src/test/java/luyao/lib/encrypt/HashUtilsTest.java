@@ -13,13 +13,13 @@ public class HashUtilsTest {
     @Test
     public void hash() {
         byte[] bytes = "Hello World!".getBytes();
-        System.out.println(TransformUtils.byte2HexStr(HashUtils.hash(bytes, HashUtils.Hash.SHA1)));
-        System.out.println(TransformUtils.byte2HexStr(HashUtils.hash(bytes, HashUtils.Hash.SHA256)));
-        System.out.println(TransformUtils.byte2HexStr(HashUtils.hash(bytes, HashUtils.Hash.MD5)));
+        System.out.println(TransformUtils.byte2HexStr(HashUtils.md5(bytes)));
+        System.out.println(TransformUtils.byte2HexStr(HashUtils.sha1(bytes)));
+        System.out.println(TransformUtils.byte2HexStr(HashUtils.sha256(bytes)));
 
-        System.out.println(HashUtils.hash("Hello World!", HashUtils.Hash.SHA1));
-        System.out.println(HashUtils.hash("Hello World!", HashUtils.Hash.SHA256));
-        System.out.println(HashUtils.hash("Hello World!", HashUtils.Hash.MD5));
+        System.out.println(HashUtils.md5("Hello World!"));
+        System.out.println(HashUtils.sha1("Hello World!"));
+        System.out.println(HashUtils.sha256("Hello World!"));
     }
 
     @Test
