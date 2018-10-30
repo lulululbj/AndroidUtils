@@ -35,19 +35,16 @@ class LocationActivity : AppCompatActivity(), LocationUtil.OnLocationListener {
 
         RxPermissions(this)
                 .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                .subscribe { granted ->
-                    if (granted) {
-                        locationUtil.startLocation()
-                    }
-                }
+                .subscribe { granted -> if (granted) locationUtil.startLocation() }
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun getAddress(address: Address?) {
+        locationTv.text = "${address?.countryName}\n${address?.getAddressLine(0)}"
     }
 
     override fun onLocationError(message: String?) {
 
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun getAddress(address: Address?) {
-        locationTv.text="${address?.countryName}\n${address?.getAddressLine(0)}"
-    }
 }

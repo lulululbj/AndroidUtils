@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">AndroidUtils</string>
+    <string name="brand">Brand</string>
+    <string name="display">Display</string>
+    <string name="product">Product</string>
+    <string name="device">Device</string>
+    <string name="board">Board</string>
+    <string name="model">Model</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="bootloader">Bootloader</string>
+    <string name="hardware">Hardware</string>
+    <string name="abis">Supported ABIs</string>
+    <string name="radio_version">Radio Version</string>
+    <string name="api">Api</string>
+    <string name="android_version">Android Version</string>
+    <string name="sdk">SDK</string>
+    <string name="os_version">Base Os</string>
+    <string name="kernel_version">Kernel</string>
+
 </resources>
