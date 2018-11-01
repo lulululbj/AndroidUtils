@@ -7,10 +7,6 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
@@ -78,41 +74,8 @@ public class DeviceUtils {
     }
 
     public static String getKernelVersion() {
-        Process process = null;
-        String kernelVersion = "";
-        try {
-            process = Runtime.getRuntime().exec("cat /proc/version");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        InputStream outs = process.getInputStream();
-        InputStreamReader isrout = new InputStreamReader(outs);
-        BufferedReader brout = new BufferedReader(isrout, 8 * 1024);
-
-
-        StringBuilder result = new StringBuilder();
-        String line;
-        try {
-            while ((line = brout.readLine()) != null) {
-                result.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            if (!result.toString().equals("")) {
-                String Keyword = "version ";
-                int index = result.indexOf(Keyword);
-                line = result.substring(index + Keyword.length());
-                index = line.indexOf(" ");
-                kernelVersion = line.substring(0, index);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
-        return kernelVersion;
+        ShellUtils.CommandResult commandResult = ShellUtils.execCommand("cat /proc/version", false);
+        return commandResult.result == 0 ? commandResult.successResult : commandResult.errorResult;
     }
 
     public static int getSDK() {
@@ -127,7 +90,8 @@ public class DeviceUtils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? telephonyManager.getImei() : telephonyManager.getDeviceId();
     }
 
-    @SuppressLint({"MissingPermission", "HardwareIds"})
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(READ_PHONE_STATE)
     public static String getMEID(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager == null) return "";
@@ -135,6 +99,7 @@ public class DeviceUtils {
     }
 
     @SuppressLint("MissingPermission")
+    @RequiresPermission(READ_PHONE_STATE)
     public static String getSN() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? Build.getSerial() : Build.SERIAL;
     }

@@ -16,5 +16,9 @@
     <string name="sdk">SDK</string>
     <string name="os_version">Base Os</string>
     <string name="kernel_version">Kernel</string>
+    <string name="imei">IMEI</string>
+    <string name="meid">MEID</string>
+    <string name="sn">SN</string>
+    <string name="mac_address">Mac Adress</string>
 
 </resources>

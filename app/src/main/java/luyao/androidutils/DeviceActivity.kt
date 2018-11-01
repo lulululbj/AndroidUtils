@@ -1,8 +1,11 @@
 package luyao.androidutils
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_device.*
 import luyao.lib.DeviceUtils
 
@@ -12,11 +15,22 @@ import luyao.lib.DeviceUtils
  */
 class DeviceActivity : AppCompatActivity() {
 
+    @SuppressLint("MissingPermission", "CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device)
 
         setDeviceInfo()
+
+        RxPermissions(this)
+                .request(Manifest.permission.READ_PHONE_STATE)
+                .subscribe { grant ->
+                    if (grant) {
+                        imei.text = DeviceUtils.getIMEI(this)
+                        meid.text = DeviceUtils.getMEID(this)
+                        sn.text = DeviceUtils.getSN()
+                    }
+                }
     }
 
     private fun setDeviceInfo() {
@@ -36,5 +50,6 @@ class DeviceActivity : AppCompatActivity() {
         api.text = DeviceUtils.getSDK().toString()
         version.text = DeviceUtils.getVersion()
         os.text = DeviceUtils.getKernelVersion()
+        macAddress.text = DeviceUtils.getMacAddress()
     }
 }

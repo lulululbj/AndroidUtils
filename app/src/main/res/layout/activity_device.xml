@@ -167,6 +167,58 @@
 
         </LinearLayout>
 
+        <LinearLayout style="@style/Device_Lin">
+
+            <TextView
+                style="@style/Device_Text"
+                android:layout_width="100dp"
+                android:text="@string/imei" />
+
+            <TextView
+                android:id="@+id/imei"
+                style="@style/Device_Text" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/Device_Lin">
+
+            <TextView
+                style="@style/Device_Text"
+                android:layout_width="100dp"
+                android:text="@string/meid" />
+
+            <TextView
+                android:id="@+id/meid"
+                style="@style/Device_Text" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/Device_Lin">
+
+            <TextView
+                style="@style/Device_Text"
+                android:layout_width="100dp"
+                android:text="@string/sn" />
+
+            <TextView
+                android:id="@+id/sn"
+                style="@style/Device_Text" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/Device_Lin">
+
+            <TextView
+                style="@style/Device_Text"
+                android:layout_width="100dp"
+                android:text="@string/mac_address" />
+
+            <TextView
+                android:id="@+id/macAddress"
+                style="@style/Device_Text" />
+
+        </LinearLayout>
+
 
         <LinearLayout style="@style/Device_Lin">
 
